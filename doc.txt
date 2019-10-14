@@ -1,0 +1,11 @@
+view/component gửi action đến store
+
+reducer
+    phân tích action -> cập nhật state mới cho store
+container
+    lên store lấy dữ liệu và chuyền cho component
+component 
+    nhận về các props để hiển thị
+
+
+mapStateToProps : chuyển state thanh props cua component
