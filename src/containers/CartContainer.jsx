@@ -1,9 +1,11 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import propTypes from 'prop-types';
-import Cart from './../components/Cart';
 import * as Message from './../contants/Messages';
+import Cart from './../components/Cart';
 import CartItem from './../components/CartItem';
+import CartResult from './../components/CartResult';
+
  // nhiệm vụ của container là lên store lấy dl về và chuyền cho product component
 class CartContainer extends React.Component{
   render(){
@@ -13,7 +15,8 @@ class CartContainer extends React.Component{
     return (
         <Cart>
           {this.showCartItem(cart)}
-          {/* vào cart nhận lại chirldern */}
+          {/* vào cart component nhận lại chirldern */}
+          {this.showTotalAmount(cart)}
         </Cart>
     );
   } 
@@ -34,6 +37,13 @@ class CartContainer extends React.Component{
       })
     }
     return result;
+  }
+  showTotalAmount = (cart) =>{
+	var result = null;
+	if(cart.length>0){
+		result = <CartResult cart = {cart}/>
+	}
+	return result;
   }
 }
 // products phải có và là mảng
