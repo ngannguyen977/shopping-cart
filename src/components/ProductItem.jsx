@@ -29,7 +29,14 @@ class ProductItem extends React.Component{
                 <div className="card-footer">
                     <span className="left">{product.price}</span>
                     <span className="right">
-                        <a className="btn-floating blue-gradient" data-toggle="tooltip" data-placement="top" title="" data-original-title="Add to Cart">
+                        <a className="btn-floating blue-gradient" 
+                        data-toggle="tooltip" 
+                        data-placement="top" 
+                        // dung arow funtion do co truyen tham so
+                        // 
+                        onClick = { () =>this.onAddToCart(product)}
+                        title="" 
+                        data-original-title="Add to Cart">
                             <i className="fa fa-shopping-cart"></i>
                         </a>
                     </span>
@@ -39,6 +46,11 @@ class ProductItem extends React.Component{
     </div>
     );
   } 
+  onAddToCart =(product)=>{
+      //product truyền vào là product đang tuong tác
+      //onAddToCart này là props được chuyền vào từ container
+    this.props.onAddToCart(product)
+  }
   showRating = (rating) =>{
     var result = [];
     for(var i = 1; i<= rating; i++){

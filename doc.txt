@@ -1,7 +1,8 @@
-view/component gửi action đến store
+view/component( click, onchange)  gửi action đến store
 
-reducer
+reducer(store)
     phân tích action -> cập nhật state mới cho store
+    (tại đây console(action) chỗ switch sẽ ra action tương ứng)
 container
     lên store lấy dữ liệu và chuyền cho component
 component 
@@ -9,3 +10,7 @@ component
 
 
 mapStateToProps : chuyển state thanh props cua component
+
+note : 
+kiểm tra nếu id sản phẩm khi người dùng thêm đã nằm trong giỏ hàng rồi
+=> chỉ việc cập nhật lại số lượng - ngược lại thỉ thêm

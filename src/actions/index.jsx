@@ -1,4 +1,4 @@
-import * as types from './../constant/ActionTypes';
+import * as types from './../contants/ActionTypes';
 
 export const actAddToCart = (product, quantity) =>{
     return {

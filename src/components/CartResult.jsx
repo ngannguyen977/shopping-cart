@@ -1,5 +1,4 @@
 import React from 'react';
-import { totalmem } from 'os';
 
 class CartResult extends React.Component{
   render(){

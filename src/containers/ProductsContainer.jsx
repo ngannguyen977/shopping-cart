@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import Products from './../components/Products';
 import ProductItem from './../components/ProductItem';
 import propTypes from 'prop-types';
+import {onAddToCart, actAddToCart} from './../actions/index';
 
  // nhiệm vụ của container là lên store lấy dl về và chuyền cho product component
 class ProductsContainer extends React.Component{
@@ -19,11 +20,18 @@ class ProductsContainer extends React.Component{
   } 
 
   showProducts(products){
+    var { onAddToCart } = this.props;//this.props.onAddToCart
     var result = null;
     if(products.length > 0){
       result = products.map((product, index)=>{
         //product là 1 cái props để chuyền vào productItem
-        return <ProductItem key={index} product = {product}/>
+        return <ProductItem 
+          key={index} 
+          product = {product}
+          // chuyền props onAddToCart dưới cho productItem 
+          //với tên là onAddToCart(trái)luôn
+          onAddToCart = {onAddToCart}
+        />
       })
     }
     return result;
@@ -50,4 +58,14 @@ const mapStateToProps = state =>{
     products : state.products
   }
 }
-export default connect(mapStateToProps, null)(ProductsContainer);
+//dispatch action thành 1 cái props onAddToCart trái để 
+//component su dung hoặc có thể chuyền vào productItem
+const mapDispathToProps = (dispatch,props)=>{
+  return {
+    onAddToCart : ( product) =>{
+      //quantity : 1
+        dispatch(actAddToCart(product, 1))
+    }
+  }
+}
+export default connect(mapStateToProps, mapDispathToProps)(ProductsContainer);
