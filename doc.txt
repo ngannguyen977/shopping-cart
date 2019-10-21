@@ -14,3 +14,15 @@ mapStateToProps : chuyển state thanh props cua component
 note : 
 kiểm tra nếu id sản phẩm khi người dùng thêm đã nằm trong giỏ hàng rồi
 => chỉ việc cập nhật lại số lượng - ngược lại thỉ thêm
+
+===============findProductInCart===============: 
+ - lấy từng phần tử trong cart ra, lấy id của nó
+ -  xem có trùng với id của sản phẩm đang thêm hay ko
+
+ //sau khi xu ly  ở reducer
+// -> tiến hành dispatch action chuyển thành props cho component
+
+========================tăng giảm số lượng khi click dấu "+" và "-"
+. tạo state giá trị mặc định cho quantity trong constructor quản lý số lượng sp
+. bắt sự kiện tại 2 button đó với hàm onUpdateQuantity có tham số là product
+để biết được đang cập nhật product nào

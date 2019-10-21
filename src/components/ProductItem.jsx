@@ -1,4 +1,5 @@
 import React from 'react';
+import * as Message from './../contants/Messages'
 
 class ProductItem extends React.Component{
   render(){
@@ -50,6 +51,9 @@ class ProductItem extends React.Component{
       //product truyền vào là product đang tuong tác
       //onAddToCart này là props được chuyền vào từ container
     this.props.onAddToCart(product)
+    // khi click button gọi tới props props này thực hiện nhiệm vụ 
+    // kết nối lên store dispatch action thay doi message
+    this.props.onChangeMessage(Message. MSG_ADD_TO_CART_SUCCESS)
   }
   showRating = (rating) =>{
     var result = [];

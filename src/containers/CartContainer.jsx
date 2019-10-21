@@ -5,6 +5,7 @@ import * as Message from './../contants/Messages';
 import Cart from './../components/Cart';
 import CartItem from './../components/CartItem';
 import CartResult from './../components/CartResult';
+import {actDeleteProductInCart, actChangeMessage, actUpdateProductQuantity} from './../actions/index'
 
  // nhiệm vụ của container là lên store lấy dl về và chuyền cho product component
 class CartContainer extends React.Component{
@@ -21,8 +22,10 @@ class CartContainer extends React.Component{
     );
   } 
   showCartItem = (cart) =>{
-    var result = Message.MSG_CART_EMPTY;
-    console.log("cart", cart)
+    var {onDeleteProductInCart, onChangeMessage, onUpdateProductQuantity} = this.props;
+    var result =<tr>
+      <td>{ Message.MSG_CART_EMPTY}</td>
+    </tr>
     if(cart.length > 0){
       //cart này lấy trên store xuống( chỗ mapStateToProps)
       result = cart.map((item,index) =>{
@@ -32,6 +35,11 @@ class CartContainer extends React.Component{
             key ={index}
             item ={item}
             index = {index}
+            onDeleteProductInCart = {onDeleteProductInCart}
+            onChangeMessage ={onChangeMessage}
+            onUpdateProductQuantity ={onUpdateProductQuantity}
+
+            //tại cartItem component nhận lại
           />
         )
       })
@@ -67,4 +75,18 @@ const mapStateToProps = state =>{
     cart : state.cart
   }
 }
-export default connect(mapStateToProps, null)(CartContainer);
+const mapDispatchToProps = (dispatch, props) =>{
+  return {
+    // chuyền props này vào cartitem
+    onDeleteProductInCart : (product) =>{
+       dispatch(actDeleteProductInCart(product))
+    },
+    onChangeMessage : (message) =>{
+      dispatch(actChangeMessage(message))
+    },
+    onUpdateProductQuantity: (product, quantity) =>{
+      dispatch(actUpdateProductQuantity(product, quantity))
+    }
+  }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(CartContainer);

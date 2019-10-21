@@ -14,7 +14,6 @@ const cart = (state = initialState, action) =>{
     
     switch(action.type){
         case Types.ADD_TO_CART:
-                console.log("action them", action)
             //state: list sp trong giỏ hàng - product : là product vừa bấm thêm
             index = findProductInCart(state, product);
             //nếu tìm thấy sp thì cộng dồn 
@@ -31,6 +30,21 @@ const cart = (state = initialState, action) =>{
             }
            localStorage.setItem('CART',JSON.stringify(state))
             //khi đã lấy được sp user click 
+            return [...state]
+        case Types.DELETE_PRODUCT_IN_CART:
+            index  = findProductInCart(state, product);
+            if(index !== -1){
+                state.splice(index, 1)
+            }
+            localStorage.setItem('CART',JSON.stringify(state))
+            return [...state]
+        case Types.UPDATE_PRODUCT_QUANTITY:
+            index = findProductInCart(state, product)
+            if(index !== -1){
+                // = quantity moi (phải) được chuyền vào từ action
+                state[index].quantity =quantity
+            }
+            localStorage.setItem('CART',JSON.stringify(state))
             return [...state]
         default : return [...state]
     }

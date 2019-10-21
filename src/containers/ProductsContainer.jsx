@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import Products from './../components/Products';
 import ProductItem from './../components/ProductItem';
 import propTypes from 'prop-types';
-import {onAddToCart, actAddToCart} from './../actions/index';
+import {onAddToCart, actAddToCart, actChangeMessage} from './../actions/index';
 
  // nhiệm vụ của container là lên store lấy dl về và chuyền cho product component
 class ProductsContainer extends React.Component{
@@ -20,7 +20,7 @@ class ProductsContainer extends React.Component{
   } 
 
   showProducts(products){
-    var { onAddToCart } = this.props;//this.props.onAddToCart
+    var { onAddToCart, onChangeMessage } = this.props;//this.props.onAddToCart
     var result = null;
     if(products.length > 0){
       result = products.map((product, index)=>{
@@ -28,9 +28,10 @@ class ProductsContainer extends React.Component{
         return <ProductItem 
           key={index} 
           product = {product}
-          // chuyền props onAddToCart dưới cho productItem 
+          // chuyền props onAddToCart (phải) dưới cho productItem 
           //với tên là onAddToCart(trái)luôn
           onAddToCart = {onAddToCart}
+          onChangeMessage = {onChangeMessage}
         />
       })
     }
@@ -49,7 +50,9 @@ ProductsContainer.propTypes = {
       price: propTypes.number.isRequired,
       rating: propTypes.number.isRequired
     })
-  ).isRequired
+  ).isRequired,
+  //có thể check function, arry
+  onChangeMessage: propTypes.func.isRequired
 }
 const mapStateToProps = state =>{
   return {
@@ -65,6 +68,11 @@ const mapDispathToProps = (dispatch,props)=>{
     onAddToCart : ( product) =>{
       //quantity : 1
         dispatch(actAddToCart(product, 1))
+    },
+    // chuyền props này vào từng productItem 
+    //để khi click mua hàng sẽ change message
+    onChangeMessage : (message) =>{
+        dispatch(actChangeMessage(message));
     }
   }
 }

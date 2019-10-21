@@ -20,6 +20,7 @@ class Cart extends React.Component{
                   </tr>
               </thead>
               <tbody>
+                {/* cartContainer chuyền vào */}
                 {children}
               </tbody>
           </table>
