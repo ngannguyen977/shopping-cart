@@ -2,16 +2,10 @@ import React from 'react';
 import * as Message from './../contants/Messages'
 
 class CartItem extends React.Component{
-    constructor(props){
-        super(props);
-        //
-        this.state = {
-            quantity: 1
-        }
-    }
+   
   render(){
     var {item} = this.props;
-    var {quantity} = item.quantity > 0 ? item : this.state
+    var {quantity} = item; //item.quantity
     console.log("sô luong", quantity)
     
     return (
@@ -58,12 +52,10 @@ class CartItem extends React.Component{
   } 
   // tham số là product và quantity đã giảm hoặc đã tăng
   onUpdateQuantity = (product, quantity) =>{
+    var {onUpdateProductQuantity, onChangeMessage} = this.props;
     if(quantity>0){
-        this.setState({
-            // set lại quantity mới rồi render lại giao diện
-            quantity: quantity
-        })
-        this.props.onUpdateProductQuantity(product, quantity);
+        onUpdateProductQuantity(product, quantity);
+        onChangeMessage(Message.MSG_UPDATE_TO_CART_SUCCESS)
     }
   }
   onDelete = (product)=>{

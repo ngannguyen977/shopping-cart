@@ -23,6 +23,8 @@ kiểm tra nếu id sản phẩm khi người dùng thêm đã nằm trong giỏ
 // -> tiến hành dispatch action chuyển thành props cho component
 
 ========================tăng giảm số lượng khi click dấu "+" và "-"
-. tạo state giá trị mặc định cho quantity trong constructor quản lý số lượng sp
+
 . bắt sự kiện tại 2 button đó với hàm onUpdateQuantity có tham số là product
 để biết được đang cập nhật product nào
+=======================================================================
+dùng state ( khởi tạo state constructor) khi có liên quan đến form
